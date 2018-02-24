@@ -75,12 +75,13 @@ def receiveJSON():
         except KeyError as e:
             print e
 
-    ### Save raw string input to content
-    if request.is_json:
-        content = request.get_json(silent=True)
-
-        write_raw(write_dir,content)
-
+    ###  Loads the request into dictionary if possible
+    content = request.get_json(silent=True)
+    print content
+    if content is None:
+        print('not good')
+    else:
+        write_raw(write_dir, content)
         write_proc(write_dir, content)
 
     return ''
