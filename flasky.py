@@ -7,9 +7,8 @@ import sys
 
 app = Flask(__name__)
 
-
-write_dir = ''
-# write_dir = '/sr/runvme/' + prefix + '/'
+prefix = sys.argv[1]
+write_dir = '/sr/runvme/' + prefix + '/'
 
 @app.route('/', methods=['POST'])
 def receiveJSON():
@@ -56,9 +55,7 @@ def receiveJSON():
     ### processes the blob and writes to proc file
     def write_proc(write_dir, content):
         try:
-            #blob = json.loads(content)
-            blob = content
-            name, age = blob['name'], blob['prop']['age']
+            name, age = content['name'], content['prop']['age']
 
             try:
                 int(age)
@@ -66,17 +63,17 @@ def receiveJSON():
                 print('age is not an int')
                 return ''
 
-            if name != "" and age != "" and no_dupe_keys(blob) and int(age) > 0:
+            if name != "" and age != "" and no_dupe_keys(content) and int(age) > 0:
                 outputs = str(name) + ' ' + str(age)
 
                 with open(write_dir + 'Proc.txt', app_or_writ(write_dir, 'Proc.txt')) as f:
-                    f.write(outputs +'\n')
+                    f.write(outputs + '\n')
 
         except KeyError as e:
             print e
 
     ###  Loads the request into dictionary if possible
-    content = request.get_json(silent=True)
+    content = request.get_json(silent = True)
     print content
     if content is None:
         print('not good')
