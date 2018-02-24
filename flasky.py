@@ -62,7 +62,7 @@ def receiveJSON():
 
             try:
                 int(age)
-            except:
+            except ValueError as e:
                 print('age is not an int')
                 return ''
 
@@ -72,7 +72,7 @@ def receiveJSON():
                 with open(write_dir + 'Proc.txt', app_or_writ(write_dir, 'Proc.txt')) as f:
                     f.write(outputs +'\n')
 
-        except Exception as e:
+        except KeyError as e:
             print e
 
     ###  Loads the request into dictionary if possible
