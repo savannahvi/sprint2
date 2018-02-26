@@ -8,7 +8,7 @@ import sys
 app = Flask(__name__)
 
 prefix = sys.argv[1]
-write_dir = '/sr/runvme/' + prefix + '/'
+write_dir = '/svr/runme/' + prefix + '/'
 
 @app.route('/', methods=['POST'])
 def receiveJSON():

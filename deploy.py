@@ -30,5 +30,6 @@ def deploy(path_to_ssh_key_private_key, server_address, prefix):
     c.close()
 
     
-#deploy('/Users/siavashmortezavi/data/comp/deeplearningkey/smortezavi.pem','ec2-54-218-42-161.us-west-2.compute.amazonaws.com','anchor')
+deploy('/Users/chrispaul/testtest','ec2-54-213-45-43.us-west-2.compute.amazonaws.com','anchor')
+
 
