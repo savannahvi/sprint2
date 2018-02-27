@@ -22,9 +22,8 @@ def deploy(path_to_ssh_key_private_key, server_address, prefix):
     time.sleep(3)
     c.exec_command("rm -r /srv/runme/" +prefix)
     c.exec_command("mkdir /srv/runme/" + prefix)
-    c.exec_command("")
+
     c.exec_command("""screen -d -m -s "Flask Server" python ~/sprint2/flasky.py %s"""%prefix)
-    c.exec_command("mv ~/sprint2/logrotate.conf  /srv/runme/"+prefix)
     c.exec_command(('(crontab -l;'
                    'echo "*/2 * * * * /bin/mv /srv/runme/{0}/Raw.txt /srv/runme/{0}/Raw_\$(date +\%F-\%T)";'
                    'echo "*/2 * * * * /bin/mv /srv/runme/{0}/Proc.txt /srv/runme/{0}/Proc_\$(date +\%F-\%T)")'
